@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hungry Bunny Games</title>
+<meta name="description" content="Hungry Bunny Games is an independent game studio. We are building Unsparkle, a third-person action roguelite.">
+<link rel="canonical" href="https://hungrybunnygames.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hungry Bunny Games">
+<meta property="og:description" content="An independent game studio. Currently building Unsparkle, a third-person action roguelite.">
+<meta property="og:url" content="https://hungrybunnygames.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#07070c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128048;</text></svg>">
+<style>
+  :root{
+    --ink:#07070c;
+    --line:rgba(233,210,150,.16);
+    --text:#d9d6e0;
+    --dim:#8e8a9c;
+    --gold:#e9d296;
+    --gold-hot:#ffe6a8;
+    --violet:#9b7fd4;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--ink);color:var(--text);
+    font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    display:flex;flex-direction:column;min-height:100svh;
+  }
+  a{color:var(--gold);text-decoration:none}
+  a:hover{color:var(--gold-hot);text-decoration:underline;text-underline-offset:3px}
+  h1,h2,h3{font-family:ui-serif,Georgia,"Times New Roman",serif;font-weight:600;margin:0}
+
+  .sky{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .sky::before,.sky::after{content:"";position:absolute;inset:-50%}
+  .sky::before{
+    background-image:
+      radial-gradient(1.4px 1.4px at 14% 22%, rgba(255,255,255,.8), transparent),
+      radial-gradient(1.2px 1.2px at 68% 11%, rgba(255,246,220,.7), transparent),
+      radial-gradient(1px 1px   at 37% 64%, rgba(255,255,255,.55), transparent),
+      radial-gradient(1.5px 1.5px at 85% 41%, rgba(233,210,150,.7), transparent),
+      radial-gradient(1px 1px   at 52% 85%, rgba(255,255,255,.45), transparent),
+      radial-gradient(1.2px 1.2px at 8% 70%, rgba(200,190,255,.55), transparent),
+      radial-gradient(1px 1px   at 91% 82%, rgba(255,255,255,.4), transparent);
+    background-size:54% 54%;opacity:.5;animation:drift 220s linear infinite;
+  }
+  .sky::after{background:radial-gradient(65% 50% at 50% -8%, rgba(155,127,212,.15), transparent 70%)}
+  @keyframes drift{to{transform:translate3d(-6%,-4%,0)}}
+  @media (prefers-reduced-motion:reduce){.sky::before{animation:none}}
+
+  .wrap{position:relative;z-index:1;width:100%;max-width:860px;margin:0 auto;padding-inline:24px}
+  main{flex:1;display:flex;flex-direction:column;justify-content:center;padding-block:clamp(56px,10vw,96px)}
+
+  .mark{font-size:44px;line-height:1;margin-bottom:26px}
+  h1{
+    font-size:clamp(34px,7vw,62px);line-height:1.05;letter-spacing:.01em;color:#fff;
+    text-shadow:0 0 44px rgba(233,210,150,.22);
+  }
+  .tagline{margin-top:22px;max-width:52ch;font-size:clamp(16px,2.2vw,19px);color:var(--text)}
+  .tagline + .tagline{margin-top:14px;color:var(--dim);font-size:16px}
+
+  .label{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);opacity:.8;margin:0 0 18px}
+  .rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);border:0;margin-block:clamp(44px,7vw,68px)}
+
+  .card{
+    display:block;border:1px solid var(--line);border-radius:16px;padding:clamp(26px,4vw,38px);
+    background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,0));
+    transition:border-color .2s,background .2s,transform .2s;
+  }
+  .card:hover{
+    border-color:rgba(233,210,150,.4);background:linear-gradient(180deg,rgba(233,210,150,.07),rgba(255,255,255,0));
+    text-decoration:none;transform:translateY(-2px);
+  }
+  .card .top{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+  .card h2{font-size:clamp(26px,4.4vw,34px);letter-spacing:.05em;color:#fff}
+  .card:hover h2{color:var(--gold-hot)}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(233,210,150,.28);border-radius:999px;
+    padding:5px 13px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);white-space:nowrap;
+  }
+  .pulse{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  @media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+  .card p{margin:0;color:var(--dim);font-size:16px;max-width:58ch}
+  .card .go{display:inline-block;margin-top:20px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+
+  .facts{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-top:34px}
+  .fact h3{font-size:17px;color:#fff;margin-bottom:7px}
+  .fact p{margin:0;color:var(--dim);font-size:14.5px;line-height:1.6}
+
+  footer{position:relative;z-index:1;border-top:1px solid var(--line);padding-block:32px;color:var(--dim);font-size:13.5px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer p{margin:0}
+
+  @media (max-width:520px){.wrap{padding-inline:18px}}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+
+<main class="wrap">
+  <p class="mark" aria-hidden="true">&#128048;</p>
+  <h1>Hungry Bunny Games</h1>
+  <p class="tagline">An independent game studio building one thing at a time, properly.</p>
+  <p class="tagline">Small enough that every decision is someone&rsquo;s decision. Slow enough to get the feel right before the feature list.</p>
+
+  <hr class="rule">
+
+  <p class="label">Currently building</p>
+  <a class="card" href="https://unsparkle.com">
+    <span class="top">
+      <h2>UNSPARKLE</h2>
+      <span class="badge"><i class="pulse"></i>In development</span>
+    </span>
+    <p>A third-person action roguelite. Descend from a town built on a fallen star into a world where the light went out, and carry some of it back. Fast, readable combat; five weapons that play like five different games; a run you lose more often than you win.</p>
+    <span class="go">Visit unsparkle.com &rarr;</span>
+  </a>
+
+  <hr class="rule">
+
+  <p class="label">How we work</p>
+  <div class="facts">
+    <div class="fact">
+      <h3>Feel first</h3>
+      <p>Nothing ships until it is good in the hand. Numbers get tuned against playtests, not spreadsheets.</p>
+    </div>
+    <div class="fact">
+      <h3>Built in Unity</h3>
+      <p>Hand-authored systems rather than bought-in frameworks, so the game can be exactly as strange as it needs to be.</p>
+    </div>
+    <div class="fact">
+      <h3>No release dates we can&rsquo;t keep</h3>
+      <p>When there is a date, it will be on this site before it is anywhere else.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; 2026 Hungry Bunny Games</p>
+    <p><a href="https://unsparkle.com">Unsparkle</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
